@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1400" viewBox="0 0 1000 1400">
+  <style>
+    .box { fill: #ffffff; stroke: #222; stroke-width:2px; rx:8; }
+    .diamond { fill: #ffffff; stroke: #222; stroke-width:2px; }
+    .text { font-family: 'Arial', sans-serif; font-size:16px; fill:#111 }
+    .title { font-size:18px; font-weight:700 }
+    .arrow { stroke:#222; stroke-width:2px; fill:none; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#222"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" class="title text">Flowchart: Dynamic MST Update</text>
+
+  <!-- Start -->
+  <rect x="350" y="80" width="300" height="50" class="box"/>
+  <text x="500" y="112" text-anchor="middle" class="text">Start / User action</text>
+
+  <!-- Add Edge box -->
+  <rect x="250" y="170" width="500" height="60" class="box"/>
+  <text x="500" y="205" text-anchor="middle" class="text">Add Edge (u, v, w)</text>
+
+  <!-- Decision: MST full? -->
+  <g transform="translate(500,300)">
+    <g class="diamond">
+      <path d="M0,-50 L70,0 L0,50 L-70,0 Z" class="diamond"/>
+    </g>
+    <text x="0" y="6" text-anchor="middle" class="text">MST full?</text>
+  </g>
+
+  <!-- buildInitialMST box (no branch) -->
+  <rect x="300" y="420" width="400" height="60" class="box"/>
+  <text x="500" y="455" text-anchor="middle" class="text">buildInitialMST()</text>
+
+  <!-- branch yes: disconnected? -->
+  <g transform="translate(500,520)">
+    <g class="diamond">
+      <path d="M0,-50 L70,0 L0,50 L-70,0 Z" class="diamond"/>
+    </g>
+    <text x="0" y="6" text-anchor="middle" class="text">u-v disconnected?</text>
+  </g>
+
+  <!-- addMSTEdge box -->
+  <rect x="300" y="640" width="400" height="60" class="box"/>
+  <text x="500" y="675" text-anchor="middle" class="text">addMSTEdge(u, v, w)</text>
+
+  <!-- findMaxEdgeOnPath box -->
+  <rect x="200" y="740" width="600" height="60" class="box"/>
+  <text x="500" y="775" text-anchor="middle" class="text">findMaxEdgeOnPath(u, v) → (remU, remV, maxW)</text>
+
+  <!-- Decision w < maxW? -->
+  <g transform="translate(500,860)">
+    <g class="diamond">
+      <path d="M0,-50 L70,0 L0,50 L-70,0 Z" class="diamond"/>
+    </g>
+    <text x="0" y="6" text-anchor="middle" class="text">w &lt; maxW?</text>
+  </g>
+
+  <!-- replace edge box -->
+  <rect x="300" y="980" width="400" height="60" class="box"/>
+  <text x="500" y="1015" text-anchor="middle" class="text">removeMSTEdge(remU, remV); addMSTEdge(u,v,w)</text>
+
+  <!-- End -->
+  <rect x="350" y="1120" width="300" height="50" class="box"/>
+  <text x="500" y="1152" text-anchor="middle" class="text">End / Update UI</text>
+
+  <!-- Arrows connecting shapes -->
+  <path d="M500 130 L500 170" class="arrow"/>
+  <path d="M500 230 L500 280" class="arrow"/>
+
+  <!-- decision to buildInitialMST (no) branch -->
+  <path d="M570 300 L720 360" class="arrow"/>
+  <path d="M720 360 L720 420" class="arrow"/>
+
+  <!-- from decision to buildInitialMST (no path continuation) -->
+  <path d="M430 300 L280 360" class="arrow"/>
+  <path d="M280 360 L280 420" class="arrow"/>
+
+  <!-- from buildInitialMST to UI End (falls through) -->
+  <path d="M500 480 L500 640" class="arrow"/>
+
+  <!-- from decision (yes) to disconnected? down arrow -->
+  <path d="M500 350 L500 480" class="arrow"/>
+
+  <!-- from disconnected? yes to addMSTEdge (left branch) -->
+  <path d="M430 520 L360 640" class="arrow"/>
+
+  <!-- from disconnected? no to findMaxEdgeOnPath (right/down branch) -->
+  <path d="M570 520 L640 740" class="arrow"/>
+
+  <!-- from findMaxEdgeOnPath to decision w<maxW -->
+  <path d="M500 800 L500 860" class="arrow"/>
+
+  <!-- from w<maxW yes to replace edge -->
+  <path d="M500 910 L500 980" class="arrow"/>
+
+  <!-- from replace edge to End -->
+  <path d="M500 1040 L500 1120" class="arrow"/>
+
+  <!-- from addMSTEdge to End -->
+  <path d="M500 700 L500 1120" class="arrow"/>
+
+</svg>

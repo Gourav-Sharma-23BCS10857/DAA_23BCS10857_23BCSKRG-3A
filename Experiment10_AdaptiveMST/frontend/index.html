@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Adaptive Spanning Trees - Dynamic MST</title>
+	<link rel="stylesheet" href="style.css" />
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+	<div class="app">
+		<header>
+			<h1>Adaptive Spanning Trees: Dynamic MST</h1>
+		</header>
+		<div class="controls">
+			<div class="panel">
+				<h3>Graph Controls</h3>
+				<div id="status" class="status"></div>
+				<div class="row">
+					<button id="btnAddNode">Add Node</button>
+					<button id="btnReset">Reset</button>
+				</div>
+				<div class="row">
+					<input id="edgeU" type="number" placeholder="u (min: 1)" min="1" />
+					<input id="edgeV" type="number" placeholder="v (min: 1)" min="1" />
+					<input id="edgeW" type="number" placeholder="weight" step="0.1" />
+					<button id="btnAddEdge">Add/Update Edge</button>
+					<button id="btnDelEdge">Delete Edge</button>
+				</div>
+				<div class="row">
+					<input id="nodeId" type="number" placeholder="Node ID to delete (min: 1)" min="1" />
+					<button id="btnDelNode">Delete Node</button>
+				</div>
+				<div class="row">
+					<label>Initial MST Algorithm:</label>
+					<select id="algo">
+						<option value="Kruskal">Kruskal</option>
+						<option value="Prim">Prim</option>
+					</select>
+					<button id="btnRebuild">Rebuild MST</button>
+				</div>
+			</div>
+			<div class="panel stats">
+				<h3>MST Info</h3>
+				<div id="stats"></div>
+			</div>
+		</div>
+		<div class="viz-container">
+			<div class="viz-panel">
+				<h3 class="panel-title">Complete Graph</h3>
+				<svg id="graph" width="460" height="600"></svg>
+			</div>
+			<div class="divider"></div>
+			<div class="viz-panel">
+				<h3 class="panel-title">Minimum Spanning Tree (MST)</h3>
+				<svg id="mst" width="460" height="600"></svg>
+			</div>
+		</div>
+	</div>
+
+	<script type="module" src="main.js"></script>
+</body>
+</html>
+
+
